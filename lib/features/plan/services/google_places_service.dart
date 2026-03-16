@@ -163,60 +163,97 @@ class GooglePlacesService {
   static const Map<String, List<MapEntry<String, TripCategory?>>>
   _cityKeywords = {
     '도쿄': [
-      MapEntry('もんじゃ焼き', TripCategory.gourmet), // 몬자야키
+      MapEntry('もんじゃ焼き', null), // 몬자야키 — 도쿄 명물
       MapEntry('立ち飲み', TripCategory.local), // 다치노미
       MapEntry('角打ち', TripCategory.local), // 카쿠우치
     ],
     '오사카': [
-      MapEntry('たこ焼き', TripCategory.gourmet), // 타코야키
-      MapEntry('お好み焼き', TripCategory.gourmet), // 오코노미야키
-      MapEntry('串カツ', TripCategory.gourmet), // 쿠시카츠
+      MapEntry('たこ焼き', null), // 타코야키 — 오사카 명물
+      MapEntry('お好み焼き', null), // 오코노미야키 — 오사카 명물
+      MapEntry('串カツ', null), // 쿠시카츠 — 오사카 명물
       MapEntry('立ち飲み', TripCategory.local),
     ],
     '교토': [
-      MapEntry('湯豆腐', TripCategory.gourmet), // 유도후
-      MapEntry('おばんざい', TripCategory.gourmet), // 오반자이
+      MapEntry('湯豆腐', null), // 유도후 — 교토 명물
+      MapEntry('おばんざい', null), // 오반자이 — 교토 명물
       MapEntry('抹茶スイーツ', TripCategory.cafe), // 말차 디저트
       MapEntry('町家カフェ', TripCategory.cafe), // 마치야 카페
     ],
     '나고야': [
-      MapEntry('矢場とん', TripCategory.gourmet), // 야바톤 (미소카츠)
-      MapEntry('コメダ珈琲', TripCategory.cafe), // 코메다커피
-      MapEntry('世界の山ちゃん', TripCategory.gourmet), // 세카이노야마짱 (데바사키)
-      MapEntry('あんかけスパ', TripCategory.gourmet), // 앙카케스파
-      MapEntry('ひつまぶし', TripCategory.gourmet), // 히츠마부시
-      MapEntry('小倉トースト', TripCategory.cafe), // 오구라토스트
+      MapEntry('矢場とん', null), // 야바톤 (미소카츠) — 나고야 명물
+      MapEntry('コメダ珈琲', null), // 코메다커피 — 나고야 모닝 문화 아이콘
+      MapEntry('世界の山ちゃん', null), // 세카이노야마짱 (데바사키) — 나고야 명물
+      MapEntry('あんかけスパ', null), // 앙카케스파 — 나고야 명물
+      MapEntry('ひつまぶし', null), // 히츠마부시 — 나고야 명물
+      MapEntry('小倉トースト', null), // 오구라토스트 — 나고야 모닝 명물
     ],
     '삿포로': [
-      MapEntry('スープカレー', TripCategory.gourmet), // 수프카레
-      MapEntry('ジンギスカン', TripCategory.gourmet), // 징기스칸
-      MapEntry('味噌ラーメン', TripCategory.gourmet), // 미소라멘
+      MapEntry('スープカレー', null), // 수프카레 — 삿포로 명물
+      MapEntry('ジンギスカン', null), // 징기스칸 — 삿포로 명물
+      MapEntry('味噌ラーメン', null), // 미소라멘 — 삿포로 명물
       MapEntry('パフェ', TripCategory.cafe), // 파르페
     ],
     '후쿠오카': [
-      MapEntry('屋台', TripCategory.gourmet), // 야타이
-      MapEntry('もつ鍋', TripCategory.gourmet), // 모츠나베
-      MapEntry('水炊き', TripCategory.gourmet), // 미즈타키
-      MapEntry('博多ラーメン', TripCategory.gourmet), // 하카타라멘
+      MapEntry('屋台', null), // 야타이 — 후쿠오카 명물
+      MapEntry('もつ鍋', null), // 모츠나베 — 후쿠오카 명물
+      MapEntry('水炊き', null), // 미즈타키 — 후쿠오카 명물
+      MapEntry('博多ラーメン', null), // 하카타라멘 — 후쿠오카 명물
     ],
     '가고시마': [
-      MapEntry('黒豚しゃぶしゃぶ', TripCategory.gourmet), // 쿠로부타샤부샤부
-      MapEntry('さつま揚げ', TripCategory.gourmet), // 사츠마아게
-      MapEntry('鶏刺し', TripCategory.gourmet), // 토리사시
+      MapEntry('黒豚しゃぶしゃぶ', null), // 쿠로부타샤부샤부 — 가고시마 명물
+      MapEntry('さつま揚げ', null), // 사츠마아게 — 가고시마 명물
+      MapEntry('鶏刺し', null), // 토리사시 — 가고시마 명물
       MapEntry('芋焼酎', TripCategory.local), // 이모쇼추 이자카야
     ],
     '오키나와': [
-      MapEntry('沖縄そば', TripCategory.gourmet), // 오키나와소바
-      MapEntry('ゴーヤーチャンプルー', TripCategory.gourmet), // 고야참플
+      MapEntry('沖縄そば', null), // 오키나와소바 — 오키나와 명물
+      MapEntry('ゴーヤーチャンプルー', null), // 고야참플 — 오키나와 명물
       MapEntry('サーターアンダギー', TripCategory.cafe), // 사타안다기
       MapEntry('泡盛', TripCategory.local), // 아와모리 이자카야
     ],
     '시즈오카': [
-      MapEntry('うなぎ', TripCategory.gourmet), // 장어
-      MapEntry('静岡おでん', TripCategory.gourmet), // 시즈오카오뎅
-      MapEntry('桜えび', TripCategory.gourmet), // 사쿠라에비
-      MapEntry('富士宮やきそば', TripCategory.gourmet), // 후지노미야야키소바
+      MapEntry('うなぎ', null), // 장어 — 시즈오카 명물
+      MapEntry('静岡おでん', null), // 시즈오카오뎅 — 시즈오카 명물
+      MapEntry('桜えび', null), // 사쿠라에비 — 시즈오카 명물
+      MapEntry('富士宮やきそば', null), // 후지노미야야키소바 — 시즈오카 명물
     ],
+  };
+
+  // ── gourmet 스타일별 타깃 nearbySearch types ─────────────
+  // gourmet 선택 + 해당 스타일 선택 시 전용 nearbySearch 추가 실행
+  static const Map<TripStyle, List<String>> _gourmetStyleTypes = {
+    TripStyle.fineDining: ['fine_dining_restaurant'],
+    TripStyle.omakase: ['sushi_restaurant'],
+    TripStyle.localEats: ['izakaya_restaurant', 'bar'],
+    TripStyle.streetFood: [
+      'ramen_restaurant',
+      'japanese_restaurant',
+      'fast_food_restaurant',
+    ],
+  };
+
+  // ── gourmet 스타일별 추가 키워드 (textSearch) ─────────────
+  static const Map<TripStyle, List<String>> _gourmetStyleKeywords = {
+    TripStyle.fineDining: ['懐石料理', 'フレンチレストラン'],
+    TripStyle.omakase: ['鮨', '寿司おまかせ'],
+    TripStyle.localEats: ['居酒屋', 'せんべろ'],
+    TripStyle.streetFood: ['ラーメン', '定食'],
+  };
+
+  // ── cafe 스타일별 타깃 nearbySearch types ─────────────────
+  static const Map<TripStyle, List<String>> _cafeStyleTypes = {
+    TripStyle.dessertFocus: ['dessert_shop', 'ice_cream_shop', 'bakery'],
+    TripStyle.traditional: ['tea_house', 'cafe'],
+    TripStyle.aestheticCafe: ['cafe', 'coffee_shop'],
+    TripStyle.specialtyCoffee: ['coffee_shop'],
+  };
+
+  // ── cafe 스타일별 추가 키워드 (textSearch) ─────────────────
+  static const Map<TripStyle, List<String>> _cafeStyleKeywords = {
+    TripStyle.dessertFocus: ['パフェ', 'ケーキ屋'],
+    TripStyle.traditional: ['純喫茶', '喫茶店'],
+    TripStyle.aestheticCafe: ['おしゃれカフェ', 'フォトジェニックカフェ'],
+    TripStyle.specialtyCoffee: ['スペシャルティコーヒー', '自家焙煎コーヒー'],
   };
 
   GooglePlacesService(this._apiKey);
@@ -256,7 +293,7 @@ class GooglePlacesService {
           final bucketKey = p.sourceKeyword != null
               ? '${p.normalizedCategory}::${p.sourceKeyword}'
               : p.normalizedCategory;
-          final limit = p.sourceKeyword != null ? 2 : 3;
+          final limit = p.sourceKeyword != null ? 2 : 4;
           slimmed.putIfAbsent(bucketKey, () => []);
           if (slimmed[bucketKey]!.length < limit) {
             slimmed[bucketKey]!.add(p);
@@ -302,6 +339,132 @@ class GooglePlacesService {
         rankPreference: 'DISTANCE',
       );
       suggestions.addAll(foodDistance);
+    }
+
+    // [호출 1c] gourmet 스타일별 타깃 nearbySearch + 키워드 검색
+    if (request.selectedCategories.contains(TripCategory.gourmet)) {
+      final gourmetStyles = request.selectedStyles[TripCategory.gourmet] ?? [];
+      await Future.wait(
+        gourmetStyles.map((style) async {
+          // 1c-1: 스타일 특화 타입 집중 검색
+          final styleTypes = _gourmetStyleTypes[style];
+          if (styleTypes != null && styleTypes.isNotEmpty) {
+            final styleResults = await _nearbySearch(
+              lat: lat,
+              lng: lng,
+              includedTypes: styleTypes,
+              maxResults: 5,
+              rankPreference: 'POPULARITY',
+            );
+            suggestions.addAll(
+              styleResults.map(
+                (p) => PlaceSuggestion(
+                  name: p.name,
+                  rating: p.rating,
+                  ratingCount: p.ratingCount,
+                  address: p.address,
+                  primaryType: p.primaryType,
+                  normalizedCategory: p.normalizedCategory,
+                  lat: p.lat,
+                  lng: p.lng,
+                  sourceKeyword: 'style_${style.name}',
+                ),
+              ),
+            );
+          }
+          // 1c-2: 스타일 특화 키워드 검색
+          final styleKeywords = _gourmetStyleKeywords[style];
+          if (styleKeywords != null) {
+            await Future.wait(
+              styleKeywords.map((keyword) async {
+                final places = await _textSearch(
+                  query: keyword,
+                  lat: lat,
+                  lng: lng,
+                );
+                suggestions.addAll(
+                  places.map(
+                    (p) => PlaceSuggestion(
+                      name: p.name,
+                      rating: p.rating,
+                      ratingCount: p.ratingCount,
+                      address: p.address,
+                      primaryType: p.primaryType,
+                      normalizedCategory: p.normalizedCategory,
+                      lat: p.lat,
+                      lng: p.lng,
+                      sourceKeyword: keyword,
+                    ),
+                  ),
+                );
+              }),
+            );
+          }
+        }),
+      );
+    }
+
+    // [호출 1d] cafe 스타일별 타깃 nearbySearch + 키워드 검색
+    if (request.selectedCategories.contains(TripCategory.cafe)) {
+      final cafeStyles = request.selectedStyles[TripCategory.cafe] ?? [];
+      await Future.wait(
+        cafeStyles.map((style) async {
+          // 1d-1: 스타일 특화 타입 집중 검색
+          final styleTypes = _cafeStyleTypes[style];
+          if (styleTypes != null && styleTypes.isNotEmpty) {
+            final styleResults = await _nearbySearch(
+              lat: lat,
+              lng: lng,
+              includedTypes: styleTypes,
+              maxResults: 5,
+              rankPreference: 'POPULARITY',
+            );
+            suggestions.addAll(
+              styleResults.map(
+                (p) => PlaceSuggestion(
+                  name: p.name,
+                  rating: p.rating,
+                  ratingCount: p.ratingCount,
+                  address: p.address,
+                  primaryType: p.primaryType,
+                  normalizedCategory: p.normalizedCategory,
+                  lat: p.lat,
+                  lng: p.lng,
+                  sourceKeyword: 'style_${style.name}',
+                ),
+              ),
+            );
+          }
+          // 1d-2: 스타일 특화 키워드 검색
+          final styleKeywords = _cafeStyleKeywords[style];
+          if (styleKeywords != null) {
+            await Future.wait(
+              styleKeywords.map((keyword) async {
+                final places = await _textSearch(
+                  query: keyword,
+                  lat: lat,
+                  lng: lng,
+                );
+                suggestions.addAll(
+                  places.map(
+                    (p) => PlaceSuggestion(
+                      name: p.name,
+                      rating: p.rating,
+                      ratingCount: p.ratingCount,
+                      address: p.address,
+                      primaryType: p.primaryType,
+                      normalizedCategory: p.normalizedCategory,
+                      lat: p.lat,
+                      lng: p.lng,
+                      sourceKeyword: keyword,
+                    ),
+                  ),
+                );
+              }),
+            );
+          }
+        }),
+      );
     }
 
     // [호출 2] 카테고리별 생활/문화 타입 통합 검색
@@ -398,7 +561,7 @@ class GooglePlacesService {
   }
 
   int _resolveFoodMaxResults(PlanRequest request) {
-    return 15;
+    return 20; // Places API (New) nearbySearch 최대치
   }
 
   // ── Places API 호출 ──────────────────────────────────────
@@ -490,7 +653,8 @@ class GooglePlacesService {
               ratingCount: p['userRatingCount'] as int?,
               address: p['formattedAddress'] as String?,
               primaryType: primaryType,
-              normalizedCategory: _typeToCategory[primaryType] ?? 'other',
+              normalizedCategory: _typeToCategory[primaryType] ??
+                  (primaryType.endsWith('_restaurant') ? 'meal' : 'other'),
               lat: (p['location']?['latitude'] as num?)?.toDouble() ?? 0,
               lng: (p['location']?['longitude'] as num?)?.toDouble() ?? 0,
             );

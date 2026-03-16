@@ -98,6 +98,7 @@ ${_buildCafeSlotGuide(request)}
 ${_buildFoodAndLifestyleContext(request)}
 
 [카테고리 준수 규칙]
+- 이 규칙은 Firestore DB 기반 관광·쇼핑·문화 장소에만 적용됩니다. food_and_lifestyle_nearby 데이터에는 적용되지 않습니다.
 - 선택된 카테고리 장소는 메인 슬롯(place_name)에 적극 배치하세요.
 - 선택되지 않은 카테고리의 장소는 메인 슬롯에 넣지 마세요. 단, 해당 권역에서 자연스럽게 마주칠 수 있는 장소라면 tip 안에서 가볍게 한 줄로만 언급할 수 있습니다.
 - 예: 애니메·서브컬처(アニメイト, まんだらけ 등) → 액티비티+애니 스타일 미선택 시 tip에서만 언급
@@ -236,7 +237,9 @@ slot_type 값: "meal" | "cafe" | "lifestyle" | "sightseeing"
 
   /// meal 슬롯 상호명 사용 원칙 — 있을 때/없을 때 명확히 분리
   String _buildFoodFallbackRule() {
-    return '- food_and_lifestyle_nearby에 meal* 장소가 있으면 반드시 그 상호명을 place_name에 그대로 사용하세요.\n'
+    return '- ⚠️ food_and_lifestyle_nearby의 meal*/cafe* 장소는 사용자가 미식·카페 카테고리를 선택하지 않았더라도 상호명을 그대로 사용해야 합니다. 아래 [카테고리 준수 규칙]은 이 데이터에 적용되지 않습니다.\n'
+        '- food_and_lifestyle_nearby에 meal* 장소가 있으면 반드시 그 상호명을 place_name에 그대로 사용하세요.\n'
+        '- food_and_lifestyle_nearby에 cafe* 장소가 있으면 반드시 그 상호명을 place_name에 그대로 사용하세요.\n'
         '- meal* 장소가 없는 식사 슬롯에 한해, 권역명과 음식 장르를 조합한 탐방 제안형'
         '(예: "사카에 골목 이자카야 탐방", "오오스 상점가 히츠마부시 탐방")으로 작성하세요. '
         '이 경우 실제 존재가 불확실한 구체적 상호명은 사용하지 마세요.';
@@ -278,7 +281,10 @@ slot_type 값: "meal" | "cafe" | "lifestyle" | "sightseeing"
 
     if (!cats.contains(TripCategory.cafe)) {
       buf.writeln(
-        '- 카페를 별도 선택하지 않았습니다. 동선상 자연스러운 타이밍에 하루 최대 1회만 cafe 장소를 조용히 배치하세요.',
+        '- 카페를 별도 선택하지 않았더라도 하루 1회는 반드시 오전·오후 중간 슬롯에 cafe* 장소를 배치하세요.',
+      );
+      buf.writeln(
+        '- food_and_lifestyle_nearby에 cafe* 장소가 있으면 반드시 그 상호명을 place_name에 사용하세요.',
       );
       return buf.toString().trim();
     }
@@ -364,7 +370,7 @@ slot_type 값: "meal" | "cafe" | "lifestyle" | "sightseeing"
     if (cats.contains(TripCategory.local)) {
       final maxSento = days! <= 3 ? 1 : 2;
       buf.writeln(
-        '- 현지인: 센토는 전체 일정 중 최대 ${maxSento}회만 배정하세요. 센토 외에도 요코초 탐방·새벽 시장·동네 슈퍼·킷사텐 등 다양한 현지 경험을 고루 배치하세요.',
+        '- 현지인: 센토는 전체 일정 중 최대 $maxSento회만 배정하세요. 센토 외에도 요코초 탐방·새벽 시장·동네 슈퍼·킷사텐 등 다양한 현지 경험을 고루 배치하세요.',
       );
     }
 
@@ -407,11 +413,11 @@ slot_type 값: "meal" | "cafe" | "lifestyle" | "sightseeing"
       if (cafeStyles.contains(TripStyle.dessertFocus)) {
         final minDessert = days <= 2 ? 2 : (days <= 4 ? 3 : 4);
         buf.writeln(
-          '- 카페·디저트: 카페/디저트 슬롯은 최대 ${maxCafe}회로 제한하세요. 그 중 ${minDessert}회 이상은 디저트 전문점을 명시적으로 배정하고, 권역마다 서로 다른 디저트 장르를 배치하세요.',
+          '- 카페·디저트: 카페/디저트 슬롯은 최대 $maxCafe회로 제한하세요. 그 중 $minDessert회 이상은 디저트 전문점을 명시적으로 배정하고, 권역마다 서로 다른 디저트 장르를 배치하세요.',
         );
       } else {
         buf.writeln(
-          '- 카페: 카페 슬롯은 최대 ${maxCafe}회로 제한하세요. 단순 휴식 카페보다 그 권역을 대표하는 감성 카페·로스터리·뷰 카페를 선별해 배치하세요.',
+          '- 카페: 카페 슬롯은 최대 $maxCafe회로 제한하세요. 단순 휴식 카페보다 그 권역을 대표하는 감성 카페·로스터리·뷰 카페를 선별해 배치하세요.',
         );
       }
     }
@@ -607,9 +613,54 @@ slot_type 값: "meal" | "cafe" | "lifestyle" | "sightseeing"
   String _buildFlightScheduleRule(PlanRequest request) {
     final arrival = _resolveArrival(request.arrivalTime);
     final departure = _resolveDeparture(request.departureTime);
+    final city = request.city ?? '';
+    final airportHint = _buildAirportTransportHint(city);
 
-    return '- 첫날은 ${arrival.label} ${_startHour(arrival)}:00 이후 일정만 배치하고, '
-        '마지막날은 ${departure.label} ${_endHour(departure)}:00 기준으로 역산하여 일정을 마감하세요.';
+    final buf = StringBuffer();
+    buf.writeln(
+      '- 첫날은 ${arrival.label} ${_startHour(arrival)}:00 이후 일정만 배치하고, '
+      '마지막날은 ${departure.label} ${_endHour(departure)}:00 기준으로 역산하여 일정을 마감하세요.',
+    );
+    buf.writeln(
+      '- 첫날 첫 번째 슬롯은 반드시 공항/역 → 숙소 체크인·짐 보관 (slot_type: lifestyle)으로 시작하세요. '
+      'tip에는 실제 이동 수단과 소요 시간을 자연스럽게 안내하세요.',
+    );
+    buf.writeln(
+      '- 마지막날 마지막 슬롯은 반드시 숙소 → 공항/역 이동 (slot_type: lifestyle)으로 마무리하세요. '
+      'tip에는 이동 수단과 "항공편 2시간 전 공항 도착 권장" 같은 여유 안내를 포함하세요.',
+    );
+    if (airportHint.isNotEmpty) {
+      buf.write('- 공항 이동 수단 참고: $airportHint');
+    }
+    return buf.toString().trim();
+  }
+
+  String _buildAirportTransportHint(String city) {
+    if (city.contains('오사카')) {
+      return '간사이 공항↔난바: 난카이 라피트 약 45분 / 이타미 공항↔우메다: 리무진버스 약 30분';
+    }
+    if (city.contains('도쿄')) {
+      return '나리타↔도쿄: N\'EX 약 60분 / 하네다↔도쿄: 케이큐선 약 30분';
+    }
+    if (city.contains('나고야')) {
+      return '중부국제공항(센트레아)↔나고야역: 메이테츠 뮤스카이 약 28분';
+    }
+    if (city.contains('후쿠오카')) {
+      return '후쿠오카 공항↔하카타역: 지하철 약 5분 / 하카타역↔텐진역: 지하철 약 6분';
+    }
+    if (city.contains('삿포로')) {
+      return '신치토세 공항↔삿포로역: JR 쾌속 에어포트 약 37분';
+    }
+    if (city.contains('교토')) {
+      return '간사이 공항↔교토역: 하루카 약 75분 / 이타미 공항↔교토역: 리무진버스 약 55분';
+    }
+    if (city.contains('가고시마')) {
+      return '가고시마 공항↔가고시마추오역: 리무진버스 약 40분';
+    }
+    if (city.contains('시즈오카')) {
+      return '후지산 시즈오카 공항↔시즈오카역: 리무진버스 약 40분';
+    }
+    return '';
   }
 
   String _buildAccommodationRule(PlanRequest request) {
