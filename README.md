@@ -129,9 +129,11 @@ $$S_{area} = (Score_{anchor} \times 0.6) + (\overline{Score}_{others} \times 0.4
 사용자의 계획된 경로에서 발생하는 개별 요금 합계와 특정 교통 패스 사용 시의 기회비용을 비교합니다.
 
 **1. 패스 절약액 계산 (Saving Calculation)**
+
 $$Saving = TotalFare_{Individual} - (Price_{Pass} + Fare_{OutsideWindow})$$
 
 **2. 최적 활성화 시점 탐색 (Sliding Window)**
+
 패스 유효 기간($d$) 동안 개별 요금의 합이 최대가 되는 시작일($t$)을 결정합니다.
 
 $$BestStartDay = \arg\max_{t} \sum_{i=t}^{t+d-1} Fare_{i}$$
