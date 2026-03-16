@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dart --version)",
+      "Bash(python3:*)",
+      "Bash(flutter analyze lib/features/type/)",
+      "Bash(flutter analyze lib/features/type/screens/type_result_screen.dart)",
+      "Bash(flutter analyze:*)",
+      "Bash(/Users/daeunlee/development/flutter/bin/flutter analyze:*)",
+      "Bash(/Users/daeunlee/Developments/flutter/bin/flutter pub:*)",
+      "Bash(/Users/daeunlee/Developments/flutter/bin/flutter analyze:*)",
+      "Bash(grep -v \"^$\")",
+      "Bash(flutter pub:*)",
+      "Bash(/Users/daeunlee/development/flutter/bin/flutter pub:*)",
+      "Bash(sed -i '' 's/final VoidCallback onTap;/final VoidCallback? onTap;/' /Users/daeunlee/flutter/palette_michi/lib/widgets/custom_action_button.dart)",
+      "Bash(sed -i '' 's/required this.onTap,/this.onTap,/' /Users/daeunlee/flutter/palette_michi/lib/widgets/custom_action_button.dart)",
+      "mcp__mcp-registry__search_mcp_registry",
+      "Bash(wc -l /Users/daeunlee/flutter/palette_michi/lib/features/plan/screens/*.dart)",
+      "Bash(rm -rf /Users/daeunlee/flutter/palette_michi/palette-michi/.dart_tool)",
+      "Bash(rmdir /Users/daeunlee/flutter/palette_michi/palette-michi)"
+    ]
+  }
+}
