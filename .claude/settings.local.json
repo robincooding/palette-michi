@@ -18,7 +18,8 @@
       "Bash(wc -l /Users/daeunlee/flutter/palette_michi/lib/features/plan/screens/*.dart)",
       "Bash(rm -rf /Users/daeunlee/flutter/palette_michi/palette-michi/.dart_tool)",
       "Bash(rmdir /Users/daeunlee/flutter/palette_michi/palette-michi)",
-      "Bash(find /Users/daeunlee/flutter/palette_michi -name .env* -type f)"
+      "Bash(find /Users/daeunlee/flutter/palette_michi -name .env* -type f)",
+      "Bash(git rm:*)"
     ]
   }
 }
